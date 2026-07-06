@@ -38,25 +38,11 @@
 - `static/picture/`：Logo、SVG 占位图、首页图标等图片素材
 - `static/image/`：业务场景与页面背景图片
 - `static/audio/set-sail-chuyun-brand.mp3`：官网背景音乐压缩版
-- `content-research/chuyun-corporate-deck.pptx`：企业宣发 PPT
-- `content-research/chuyun-corporate-deck.md`：企业宣发内容稿
-- `tools/sync-english-content.js`：英文内容同步脚本
+- `static/docs/chuyun-corporate-deck.pptx`：企业宣发 PPT
 
 ## 内容维护
 
-英文站内容主要由 `tools/sync-english-content.js` 同步到：
-
-- `static/js/app.js`
-- `static/js/subpage.js`
-- `en.html`
-
-修改英文内容后，可执行：
-
-```bash
-node tools/sync-english-content.js
-```
-
-执行后建议检查：
+修改内容后建议检查：
 
 ```bash
 node --check static/js/app.js
@@ -90,8 +76,7 @@ node --check static/js/subpage.js
 ├── investor.html
 ├── news-index.html
 ├── static/
-├── content-research/
-└── tools/
+└── static/docs/
 ```
 
 正式上线域名：
