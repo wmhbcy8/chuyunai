@@ -2455,7 +2455,7 @@ html[lang="zh-Hant"] .hero p {
 
 .news {
   z-index: 5;
-  padding: 76px 0 clamp(32px, 4vw, 56px);
+  padding: 76px 0 clamp(18px, 2.5vw, 34px);
 }
 
 .news .section-heading {
@@ -4668,11 +4668,11 @@ html[lang="zh-CN"] .tech-meta {
 
 .ecosystem-showcase {
   width: min(var(--page-max), calc(100% - 48px));
-  margin: calc(var(--module-gap) * -0.35) auto var(--module-gap);
+  margin: calc(var(--module-gap) * -0.55) auto var(--module-gap);
 }
 
 .ecosystem-showcase__heading {
-  margin: 0 auto 30px;
+  margin: 0 auto 24px;
   text-align: center;
 }
 
@@ -4680,9 +4680,9 @@ html[lang="zh-CN"] .tech-meta {
   margin: 0;
   color: #121826;
   font-family: var(--title-font);
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.14;
-  font-weight: 780;
+  font-size: 2rem;
+  line-height: 32px;
+  font-weight: 600;
 }
 
 .ecosystem-showcase__heading p {
@@ -5304,7 +5304,7 @@ html[lang="zh-CN"] .tech-meta {
 
   .news {
     padding-top: 56px;
-    padding-bottom: clamp(28px, 6vw, 46px);
+    padding-bottom: clamp(18px, 5vw, 30px);
   }
 
   .news-layout {

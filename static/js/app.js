@@ -1780,10 +1780,13 @@ $$("[data-news]").forEach((card) => {
   });
 });
 
-$("[data-open-news]").addEventListener("click", () => {
-  const newsIndexUrl = getCopy().news.moreUrl || "news-index.html";
-  window.open(resolveSiteHref(newsIndexUrl), "_self", "noopener");
-});
+const openNewsButton = $("[data-open-news]");
+if (openNewsButton) {
+  openNewsButton.addEventListener("click", () => {
+    const newsIndexUrl = getCopy().news.moreUrl || "news-index.html";
+    window.open(resolveSiteHref(newsIndexUrl), "_self", "noopener");
+  });
+}
 
 updateStaticCopy();
 renderProductAccordion(currentProductKey, "initial");
