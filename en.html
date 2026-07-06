@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="route-hash-scroll-guard">html { scroll-behavior: auto !important; }</style>
+    <script>
+      (function () {
+        const hash = location.hash;
+        if (!hash || hash.length < 2) {
+          document.getElementById("route-hash-scroll-guard")?.remove();
+          return;
+        }
+        let id;
+        try {
+          id = decodeURIComponent(hash.slice(1));
+        } catch {
+          return;
+        }
+        function snapRouteHash() {
+          const target = document.getElementById(id);
+          if (!target) return;
+          document.documentElement.style.scrollBehavior = "auto";
+          document.body.style.scrollBehavior = "auto";
+          target.scrollIntoView({ block: "start", behavior: "instant" });
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", snapRouteHash, { once: true });
+        } else {
+          snapRouteHash();
+        }
+      })();
+    </script>
+    <link rel="icon" href="static/picture/logo-wide.png" type="image/png">
+    <title>ChuYun Digital Voyage | AI Content, Cross-Border Store Clusters, OPC Parks and AI Compute Platform</title>
+    <meta name="description" content="ChuYun Digital Voyage presents AI comic-drama production and training, cross-border store-cluster investment and incubation, OPC park infrastructure and operations, AI compute operations and sales, and Optics Valley supercomputing cooperation resources.">
+    <script>
+      const previewMode = new URLSearchParams(window.location.search).get("view");
+      if (previewMode === "4k" || previewMode === "2k") {
+        document.documentElement.classList.add(`preview-${previewMode}`);
+      }
+    </script>
+    <link rel="stylesheet" href="static/css/styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="" aria-label="ChuYun Digital Voyage Home">
+        <img src="static/picture/logo-wide.png" alt="ChuYun Digital Voyage">
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <div class="nav-item">
+          <a class="nav-trigger" href="#products" data-section="products"><span>Business Matrix</span></a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-trigger" href="#technology" data-section="technology"><span>Platform</span></a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-trigger" href="/en/news-index"><span>Updates</span></a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-trigger" href="/en/investor/"><span>Progress</span></a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-trigger" href="/en/partner/#recruit"><span>Partnerships</span></a>
+        </div>
+        <div class="nav-item">
+          <button class="nav-trigger" type="button" data-section="about"><span>About Us</span><span class="nav-chevron" aria-hidden="true"></span></button>
+          <div class="nav-dropdown nav-dropdown--about" role="menu" aria-label="公司导航">
+            <div class="nav-dropdown__group">
+              <h3 class="nav-dropdown__title">About ChuYun Digital Voyage</h3>
+              <a href="/en/about/">Company Overview</a>
+              <a href="/en/about/#contact">Explore Partnerships</a>
+            </div>
+            <div class="nav-dropdown__group">
+              <h3 class="nav-dropdown__title">Project Progress</h3>
+              <a href="/en/investor/">Project Stages and Resources</a>
+              <a href="/en/investor/#announcements">Milestones</a>
+              <a href="/en/investor/#investor-contact">Cooperation Contact</a>
+            </div>
+            <div class="nav-dropdown__group">
+              <h3 class="nav-dropdown__title">Partnerships</h3>
+              <a href="partner.html?lang=en">Partner Types</a>
+              <a href="partner.html?lang=en#recruit">Submit Interest</a>
+            </div>
+            <div class="nav-dropdown__group">
+              <a href="/en/investor/#investor-contact">Cooperation Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-menu" data-language-menu>
+          <button class="language-switch" type="button" data-language-toggle aria-label="语言" aria-expanded="false">
+            <svg viewbox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
+              <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.4 3.4 5.4 3.4 9s-1.2 6.6-3.4 9c-2.2-2.4-3.4-5.4-3.4-9S9.8 5.4 12 3Z"></path>
+            </svg>
+            <span data-language-current>English</span>
+            <span class="language-switch__chevron" aria-hidden="true"></span>
+          </button>
+          <div class="language-dropdown" role="menu" aria-label="语言选择">
+            <button type="button" role="menuitem" data-language-option="简体中文">简体中文</button>
+            <button type="button" role="menuitem" data-language-option="English">English</button>
+          </div>
+        </div>
+        <a class="primary-button primary-button--small" href="/en/partner/#recruit" data-nav-cta>Get the Plan</a>
+        <button class="menu-button" type="button" data-menu aria-label="菜单" aria-expanded="false" aria-controls="mobile-navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="mobile-panel" id="mobile-navigation" data-mobile-panel aria-label="移动端导航">
+      <div class="mobile-panel__inner">
+        <div class="mobile-panel__section mobile-panel__section--main">
+          <a class="mobile-panel__primary-link" href="#products">Business Matrix</a>
+          <a class="mobile-panel__primary-link" href="#technology">Platform</a>
+          <a class="mobile-panel__primary-link" href="/en/news-index">Updates</a>
+          <a class="mobile-panel__primary-link" href="/en/investor/">Progress</a>
+          <a class="mobile-panel__primary-link" href="/en/partner/#recruit">Partnerships</a>
+        </div>
+
+        <section class="mobile-panel__section mobile-panel__section--accordion" aria-labelledby="mobile-about-title">
+          <button class="mobile-panel__accordion" type="button" data-mobile-accordion aria-expanded="false" aria-controls="mobile-about-submenu">
+            <span id="mobile-about-title">公司</span>
+            <span class="mobile-panel__arrow" aria-hidden="true"></span>
+          </button>
+          <div class="mobile-panel__submenu" id="mobile-about-submenu" data-mobile-submenu aria-hidden="true">
+            <div class="mobile-panel__group">
+              <div class="mobile-panel__links">
+                <a href="/en/about/">Company Overview</a>
+                <a href="/en/about/#contact">Explore Partnerships</a>
+              </div>
+            </div>
+            <div class="mobile-panel__group">
+              <p class="mobile-panel__eyebrow">Project Progress</p>
+              <div class="mobile-panel__links">
+                <a href="/en/investor/">Project Stages and Resources</a>
+                <a href="/en/investor/#announcements">Milestones</a>
+                <a href="/en/investor/#investor-contact">Cooperation Contact</a>
+              </div>
+            </div>
+            <div class="mobile-panel__group">
+              <p class="mobile-panel__eyebrow">Partnerships</p>
+              <div class="mobile-panel__links">
+                <a href="/en/partner/">Partner Types</a>
+                <a href="/en/partner/#recruit">Submit Interest</a>
+              </div>
+            </div>
+            <a class="mobile-panel__primary-link mobile-panel__primary-link--founder" href="/en/investor/#investor-contact">Cooperation Contact</a>
+          </div>
+        </section>
+
+        <a class="mobile-panel__cta" href="/en/partner/#recruit" data-nav-cta-mobile>Get the Plan</a>
+      </div>
+    </nav>
+
+    <main class="page-shell">
+      <section class="hero section" id="hero" aria-labelledby="hero-title">
+        <div class="hero__motion" aria-hidden="true">
+          <span class="hero__motion-layer hero__motion-layer--left"></span>
+          <span class="hero__motion-layer hero__motion-layer--cyan"></span>
+          <span class="hero__motion-layer hero__motion-layer--warm"></span>
+          <span class="hero__motion-layer hero__motion-layer--violet"></span>
+        </div>
+        <div class="hero__wash" aria-hidden="true"></div>
+        <div class="hero-icon-cloud" aria-hidden="true">
+          <span class="liquid-icon liquid-icon--1"><img class="liquid-icon__logo liquid-icon__logo--wide" src="static/picture/hero-icon-office-assistant.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--2"><img class="liquid-icon__logo liquid-icon__logo--tall" src="static/picture/hero-icon-logoblack.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--3"><img class="liquid-icon__logo liquid-icon__logo--wide" src="static/picture/hero-icon-senseaudio.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--4"><img class="liquid-icon__logo" src="static/picture/hero-icon-sensear.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--5"><img class="liquid-icon__logo" src="static/picture/hero-icon-ririxin.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--6"><img class="liquid-icon__logo liquid-icon__logo--wide" src="static/picture/hero-icon-foundation.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--7"><img class="liquid-icon__logo liquid-icon__logo--tall" src="static/picture/hero-icon-ruying.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--8"><img class="liquid-icon__logo" src="static/picture/hero-icon-shangliang.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--9"><img class="liquid-icon__logo" src="static/picture/hero-icon-maskgroup.png" alt=""></span>
+          <span class="liquid-icon liquid-icon--10"><img class="liquid-icon__logo" src="static/picture/hero-icon-appstore.png" alt=""></span>
+        </div>
+        <div class="hero__content">
+          <h1 id="hero-title">ChuYun Digital Voyage<br>AI Content, Cross-Border & Compute Platform</h1>
+          <p>Connecting university talent, government parks, cross-border channels, Optics Valley compute resources and industrial service partners.</p>
+          <a class="hero-button" href="partner.html?lang=en">Explore Partnerships</a>
+        </div>
+      </section>
+
+      <section class="news section" id="news" aria-labelledby="news-title">
+        <div class="section-heading">
+          <h2 id="news-title">最新动态</h2>
+        </div>
+
+        <div class="news-layout">
+          <article class="news-feature glass-panel" data-news>
+            <div class="news-feature__carousel" data-news-carousel aria-hidden="true"></div>
+            <button class="news-arrow news-arrow--prev" type="button" data-news-prev aria-label="上一条最新动态">
+              <svg viewbox="0 0 24 24" aria-hidden="true">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+            <button class="news-arrow news-arrow--next" type="button" data-news-next aria-label="下一条最新动态">
+              <svg viewbox="0 0 24 24" aria-hidden="true">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+            <div class="news-feature__chips">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="news-feature__copy">
+              <h3></h3>
+              <strong></strong>
+              <p></p>
+              <button class="primary-button primary-button--arrow news-feature__cta" type="button">了解更多</button>
+            </div>
+          </article>
+
+        </div>
+
+        <button class="text-link" type="button" data-open-news>More Updates</button>
+      </section>
+
+      <section class="products section" id="products" aria-labelledby="products-title">
+        <div class="section-heading">
+          <h2 id="products-title">产品体系</h2>
+          <p>A practical business portfolio across AI content, cross-border store clusters, OPC parks and AI compute resources</p>
+        </div>
+
+        <div class="product-accordion" data-product-accordion>
+          <article class="product-expanded product-expanded--sensenova product-expanded--dynamic glass-panel" data-product-expanded>
+            <div class="product-expanded__copy">
+              <span class="product-number" data-product-number>01</span>
+              <div>
+                <h3 data-product-title>AI Comic-Drama Production and Training</h3>
+                <p data-product-subtitle>苟日新 · 日日新 · 又日新</p>
+                <ul data-product-list>
+                  <li><a href="about.html?lang=en" data-product-link="AI Comic-Drama Curriculum">AI Comic-Drama Curriculum</a></li>
+                  <li><a href="partner.html?lang=en" data-product-link="Store-Cluster Investment and Management">Store-Cluster Investment and Management</a></li>
+                  <li><a href="partner.html?lang=en#solutions" data-product-link="OPC Park Operations Business Matrix">OPC Park Operations Business Matrix</a></li>
+                  <li><a href="about.html?lang=en#contact" data-product-link="Compute Resource Sales">Compute Resource Sales</a></li>
+                  <li><a href="investor.html?lang=en#announcements" data-product-link="Project Milestones">Project Milestones</a></li>
+                  <li><a href="partner.html?lang=en#recruit" data-product-link="Submit Partnership Interest">Submit Partnership Interest</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="product-stage product-stage--sensenova" aria-hidden="true"></div>
+            <span class="product-stage-hotspot" aria-hidden="true"></span>
+          </article>
+
+          <div class="product-row" data-product-row="infra" role="button" tabindex="0" aria-label="Expand Cross-Border Store-Cluster Investment and Incubation">
+            <span>02</span>
+            <strong>Cross-Border Store-Cluster Investment and Incubation</strong>
+            <em class="product-row__toggle" aria-hidden="true"></em>
+          </div>
+          <div class="product-row" data-product-row="city" role="button" tabindex="0" aria-label="Expand OPC Park Infrastructure and Operations">
+            <span>03</span>
+            <strong>OPC Park Infrastructure and Operations</strong>
+            <em class="product-row__toggle" aria-hidden="true"></em>
+          </div>
+          <div class="product-row" data-product-row="innovation" role="button" tabindex="0" aria-label="展开更多产品">
+            <span>04</span>
+            <strong>更多产品</strong>
+            <em class="product-row__toggle" aria-hidden="true"></em>
+          </div>
+        </div>
+      </section>
+
+      <section class="technology section" id="technology" aria-labelledby="technology-title">
+        <div class="section-heading">
+          <div class="section-heading__copy">
+            <h2 id="technology-title">技术</h2>
+            <p>以原创技术体系为根基，布局多领域、多方向前沿研究</p>
+          </div>
+        </div>
+
+        <div class="tech-carousel" data-tech-carousel>
+        <div class="tech-grid" data-tech-track aria-label="技术列表">
+          <article class="tech-card">
+            <img class="tech-card__image" src="static/picture/chuyun-brand-placeholder.svg" alt="" decoding="async">
+            <div class="tech-copy">
+              <h3>生成式 AI</h3>
+              <p>坚持原生多模态融合技术路线，涵盖大语言模型、AI 文生图创作、2D/3D 数字人生成、代码生成等模型及应用体系。</p>
+              <div class="tech-meta" aria-hidden="true">
+                <span>PLATFORM</span>
+                <strong>多模态生成</strong>
+              </div>
+              <a class="tech-button" href="about.html?lang=en">Learn More</a>
+            </div>
+          </article>
+
+          <article class="tech-card">
+            <img class="tech-card__image" src="static/picture/chuyun-brand-placeholder.svg" alt="" decoding="async">
+            <div class="tech-copy">
+              <h3>算力基础设施</h3>
+              <p>Manages multi-store operations, orders, inventory, customer service, product selection, financial settlement and investment reviews so incubation projects have data, risk control and revenue models.</p>
+              <div class="tech-meta" aria-hidden="true">
+                <span>PLATFORM</span>
+                <strong>Operating System</strong>
+              </div>
+              <a class="tech-button" href="partner.html?lang=en">Learn More</a>
+            </div>
+          </article>
+
+          <article class="tech-card">
+            <img class="tech-card__image" src="static/picture/chuyun-brand-placeholder.svg" alt="" decoding="async">
+            <div class="tech-copy">
+              <h3>计算机视觉</h3>
+              <p>Covers workstations, trainees, projects, events, policy applications, investment promotion displays and government data dashboards for long-term park infrastructure and operations.</p>
+              <div class="tech-meta" aria-hidden="true">
+                <span>PLATFORM</span>
+                <strong>视觉 AI</strong>
+              </div>
+              <a class="tech-button" href="investor.html?lang=en">Learn More</a>
+            </div>
+          </article>
+
+          <article class="tech-card">
+            <img class="tech-card__image" src="static/picture/chuyun-brand-placeholder.svg" alt="" decoding="async">
+            <div class="tech-copy">
+              <h3>Compute Resources</h3>
+              <p>Works with strategic resources such as Optics Valley Supercomputing Center to package compute plans, API usage, model applications, cost accounting and channel sales.</p>
+              <div class="tech-meta" aria-hidden="true">
+                <span>PLATFORM</span>
+                <strong>Compute Resources</strong>
+              </div>
+              <a class="tech-button" href="https://github.com/OpenSenseNova" target="_blank" rel="noopener">Learn More</a>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <footer class="footer-band section" id="about">
+        <img src="static/picture/logo-wide.png" alt="ChuYun Digital Voyage">
+        <p>AI FOR A BETTER TOMORROW</p>
+        <div class="footer-line"></div>
+        <p class="legal"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">鄂ICP备2026031741号</a>  © 2026 <a href="https://chuyunai.com.cn/" target="_blank" rel="noopener">湖北楚云数航科技有限公司</a>. All Rights Reserved.</p>
+      </footer>
+    </main>
+
+    <div class="toast" data-toast></div>
+
+    <script src="static/js/app.js"></script>
+  </body>
+</html>
