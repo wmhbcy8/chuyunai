@@ -245,6 +245,7 @@ function assetPath(path) {
 function initBrandAudio() {
   if (document.querySelector("[data-brand-audio]")) return;
   const storageKey = "chuyun.brandAudio.enabled";
+  const timeKey = "chuyun.brandAudio.currentTime";
   const wrapper = document.createElement("div");
   wrapper.className = "brand-audio";
   wrapper.dataset.brandAudio = "";
@@ -273,6 +274,25 @@ function initBrandAudio() {
       return null;
     }
   };
+  const saveCurrentTime = () => {
+    try {
+      if (Number.isFinite(audio.currentTime)) {
+        localStorage.setItem(timeKey, String(audio.currentTime));
+      }
+    } catch {
+      // Ignore storage failures; audio controls still work.
+    }
+  };
+  const restoreCurrentTime = () => {
+    try {
+      const saved = Number.parseFloat(localStorage.getItem(timeKey) || "0");
+      if (Number.isFinite(saved) && saved > 0) {
+        audio.currentTime = saved;
+      }
+    } catch {
+      // Some browsers only allow seeking after metadata is ready.
+    }
+  };
 
   const setPlayingState = (isPlaying) => {
     button.classList.toggle("is-playing", isPlaying);
@@ -283,6 +303,7 @@ function initBrandAudio() {
 
   const playAudio = async () => {
     try {
+      restoreCurrentTime();
       await audio.play();
       setPreference("on");
       setPlayingState(true);
@@ -293,6 +314,7 @@ function initBrandAudio() {
   };
 
   const pauseAudio = () => {
+    saveCurrentTime();
     audio.pause();
     setPreference("off");
     setPlayingState(false);
@@ -307,7 +329,14 @@ function initBrandAudio() {
   });
 
   audio.addEventListener("pause", () => setPlayingState(false));
-  audio.addEventListener("play", () => setPlayingState(true));
+  audio.addEventListener("play", () => {
+    restoreCurrentTime();
+    setPlayingState(true);
+  });
+  audio.addEventListener("timeupdate", saveCurrentTime);
+  audio.addEventListener("loadedmetadata", restoreCurrentTime, { once: true });
+  window.addEventListener("pagehide", saveCurrentTime);
+  window.addEventListener("beforeunload", saveCurrentTime);
 
   if (getPreference() === "on") {
     window.setTimeout(playAudio, 180);
