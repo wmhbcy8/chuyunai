@@ -1064,6 +1064,8 @@ function updateStaticCopy() {
     if (button) button.href = cardCopy.buttonUrl || button.href;
   });
 
+  renderEcosystemShowcase();
+
   setText(".footer-band > p", copy.footer.slogan);
   setHtml(".footer-band .legal", copy.footer.legal);
 
@@ -1221,6 +1223,130 @@ function bindProductLinks() {
       });
     });
   });
+}
+
+function solutionCardMarkup(key) {
+  const item = getLocalizedProduct(key);
+  const tools = (item.links || []).slice(0, 3).map(normalizeProductTool);
+  const href = resolveSiteHref(tools[0]?.url || (currentLanguage === "en" ? "partner.html?lang=en" : "partner.html"));
+  const externalAttrs = isExternalHref(href) ? ' target="_blank" rel="noopener"' : "";
+  return `
+    <article class="solution-card solution-card--${key}">
+      <a class="solution-card__link" href="${escapeHtml(href)}"${externalAttrs} aria-label="${escapeHtml(item.title)}"></a>
+      <div class="solution-card__top">
+        <span>${escapeHtml(item.number)}</span>
+        <strong>${escapeHtml(tools[0]?.kicker || item.title)}</strong>
+      </div>
+      <h3>${productTitleMarkup(key, item.title)}</h3>
+      <p>${escapeHtml(item.subtitle)}</p>
+      <div class="solution-card__tags">
+        ${tools.map((tool) => `<em>${escapeHtml(tool.title)}</em>`).join("")}
+      </div>
+      <div class="solution-card__arrow" aria-hidden="true">→</div>
+    </article>
+  `;
+}
+
+const ecosystemCopy = {
+  "zh-CN": {
+    infrastructure: {
+      eyebrow: "资源网络",
+      title: "楚云数航连接高校、园区、跨境渠道与算力资源",
+      desc: "以武汉光谷科学岛为核心，串联高校实训、OPC园区、跨境平台、内容团队、投资人和光谷超算中心战略合作资源，支撑项目从课程、工位、店铺到算力调用的完整落地。",
+      stats: [["4", "核心业务版块"], ["6+", "资源协同场景"], ["OPC", "园区复制模型"], ["AI", "算力与内容底座"]],
+      nodes: [["武汉光谷科学岛", "总部与OPC样板基地"], ["高校实训基地", "课程、学员、项目生产"], ["跨境渠道", "TikTok / Ozon / 速卖通 / 独立站"], ["光谷超算中心", "算力运营与企业AI应用"], ["内容团队", "AI漫剧、虚拟人、品牌内容"], ["企业客户", "数字贸易、培训与算力方案"]]
+    },
+    compliance: {
+      title: "安全合规与交付保障",
+      desc: "围绕课程、店群、园区和算力合作建立统一的项目台账、交付标准、数据看板与资源审核机制。",
+      items: [["项目可追踪", "课程、工位、店铺、内容生产和算力调用均形成阶段记录。"], ["资源可审核", "合作伙伴、渠道资源、项目数据和收益路径进入统一评估流程。"], ["交付可复制", "将高校、园区、企业和投资合作拆解为可复用的方案包。"]]
+    },
+    customers: {
+      eyebrow: "客户案例",
+      title: "成功的客户案例",
+      desc: "以真实业务场景展示楚云数航的项目组织能力。",
+      cases: [["高校实训共建", "围绕AI漫剧、数字贸易和跨境店群课程，形成可招生、可实训、可就业的项目闭环。"], ["OPC园区样板", "规划工位、直播间、产品展示、AI实训室和数据看板，支撑园区招商与运营。"], ["跨境店群孵化", "通过店群托管、运营陪跑、项目库筛选和投资分润，帮助创业团队跑通跨境业务。"]]
+    }
+  },
+  en: {
+    infrastructure: {
+      eyebrow: "Resource Network",
+      title: "ChuYun Connects Universities, Parks, Cross-Border Channels and Compute Resources",
+      desc: "Centered on Wuhan Optics Valley Science Island, ChuYun links university training, OPC parks, cross-border platforms, content teams, investors and strategic compute resources from Optics Valley Supercomputing Center.",
+      stats: [["4", "Core Business Lines"], ["6+", "Resource Scenarios"], ["OPC", "Park Replication Model"], ["AI", "Compute and Content Base"]],
+      nodes: [["Optics Valley Science Island", "Headquarters and OPC showcase"], ["University Training Bases", "Courses, talent and project production"], ["Cross-Border Channels", "TikTok / Ozon / AliExpress / independent sites"], ["Optics Valley Supercomputing", "Compute operations and enterprise AI"], ["Content Teams", "AI comic drama, virtual humans and brand content"], ["Enterprise Clients", "Digital trade, training and compute plans"]]
+    },
+    compliance: {
+      title: "Secure Delivery and Governance",
+      desc: "ChuYun builds unified project ledgers, delivery standards, data dashboards and resource-review workflows across courses, stores, parks and compute cooperation.",
+      items: [["Trackable Projects", "Courses, workstations, stores, content production and compute calls are recorded by stage."], ["Auditable Resources", "Partners, channels, project data and revenue paths enter a shared evaluation process."], ["Replicable Delivery", "University, park, enterprise and investment cooperation is packaged into reusable solutions."]]
+    },
+    customers: {
+      eyebrow: "Customer Stories",
+      title: "Successful Customer Scenarios",
+      desc: "Business scenarios that demonstrate ChuYun's project organization capability.",
+      cases: [["University Training Program", "AI comic drama, digital trade and store-cluster courses form a loop from enrollment and training to project output."], ["OPC Park Showcase", "Workstations, live rooms, product displays, AI training rooms and dashboards support park promotion and operations."], ["Cross-Border Store Incubation", "Managed store clusters, operations coaching, project screening and revenue sharing help teams validate cross-border business."]]
+    }
+  }
+};
+
+function ecosystemData() {
+  return currentLanguage === "en" ? ecosystemCopy.en : ecosystemCopy["zh-CN"];
+}
+
+function ensureEcosystemSection() {
+  let section = $("[data-ecosystem-showcase]");
+  if (section) return section;
+  const technology = document.getElementById("technology");
+  if (!technology) return null;
+  section = document.createElement("section");
+  section.className = "ecosystem-showcase section";
+  section.setAttribute("data-ecosystem-showcase", "");
+  technology.insertAdjacentElement("afterend", section);
+  return section;
+}
+
+function renderEcosystemShowcase() {
+  const section = ensureEcosystemSection();
+  if (!section) return;
+  const data = ecosystemData();
+  section.innerHTML = `
+    <div class="ecosystem-map">
+      <div class="ecosystem-map__copy">
+        <span>${escapeHtml(data.infrastructure.eyebrow)}</span>
+        <h2>${escapeHtml(data.infrastructure.title)}</h2>
+        <p>${escapeHtml(data.infrastructure.desc)}</p>
+        <div class="ecosystem-stats">
+          ${data.infrastructure.stats.map(([value, label]) => `<strong><b>${escapeHtml(value)}</b><small>${escapeHtml(label)}</small></strong>`).join("")}
+        </div>
+      </div>
+      <div class="ecosystem-map__visual" aria-hidden="true">
+        <div class="ecosystem-orbit ecosystem-orbit--outer"></div>
+        <div class="ecosystem-orbit ecosystem-orbit--inner"></div>
+        ${data.infrastructure.nodes.map(([title, note], index) => `<div class="ecosystem-node ecosystem-node--${index + 1}"><b>${escapeHtml(title)}</b><small>${escapeHtml(note)}</small></div>`).join("")}
+      </div>
+    </div>
+    <div class="ecosystem-assurance">
+      <div>
+        <h2>${escapeHtml(data.compliance.title)}</h2>
+        <p>${escapeHtml(data.compliance.desc)}</p>
+      </div>
+      <div class="ecosystem-assurance__grid">
+        ${data.compliance.items.map(([title, body], index) => `<article><span>0${index + 1}</span><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p></article>`).join("")}
+      </div>
+    </div>
+    <div class="customer-stories">
+      <div class="customer-stories__head">
+        <span>${escapeHtml(data.customers.eyebrow)}</span>
+        <h2>${escapeHtml(data.customers.title)}</h2>
+        <p>${escapeHtml(data.customers.desc)}</p>
+      </div>
+      <div class="customer-stories__grid">
+        ${data.customers.cases.map(([title, body], index) => `<article><div class="customer-logo">CY${index + 1}</div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p><a href="${currentLanguage === "en" ? "partner.html?lang=en#solutions" : "partner.html#solutions"}">${currentLanguage === "en" ? "View Solution" : "查看方案"}</a></article>`).join("")}
+      </div>
+    </div>
+  `;
+  applyCjkLatinSpacing(section);
 }
 
 function getNewsSlides() {
@@ -1415,57 +1541,9 @@ function productDrawerMarkup(key) {
 
 function renderProductAccordion(activeKey, motion = "initial") {
   const accordion = $("[data-product-accordion]");
-  if (!accordion.dataset.drawerReady) {
-    accordion.innerHTML = productOrder.map((key) => productDrawerMarkup(key)).join("");
-    accordion.dataset.drawerReady = "true";
-    bindProductLinks();
-    bindProductRows();
-  }
-
-  const activeIndex = productOrder.indexOf(activeKey);
-  const motionClasses = ["product-expanded--from-top", "product-expanded--from-bottom", "is-revealing"];
-  accordion.dataset.productDirection = motion;
-  productOrder.forEach((key, index) => {
-    const drawer = $(`[data-product-item="${key}"]`, accordion);
-    const row = $(`[data-product-row="${key}"]`, drawer);
-    const panel = $(".product-drawer__panel", drawer);
-    const expanded = $("[data-product-expanded]", drawer);
-    const isActive = key === activeKey;
-    const isBeforeActive = index === activeIndex - 1;
-    drawer.classList.toggle("product-drawer--active", isActive);
-    drawer.classList.toggle("product-drawer--before-active", isBeforeActive);
-    row.classList.toggle("product-row--before-expanded", isBeforeActive);
-    row.setAttribute("aria-expanded", String(isActive));
-    row.removeAttribute("aria-hidden");
-    row.tabIndex = isActive ? -1 : 0;
-    panel.setAttribute("aria-hidden", String(!isActive));
-    expanded?.classList.remove(...motionClasses);
-    if (expanded) {
-      expanded.dataset.productMotion = isActive ? motion : "settled";
-    }
-
-    if (isActive && motion !== "initial" && expanded) {
-      void expanded.offsetWidth;
-      expanded.classList.add(`product-expanded--${motion}`, "is-revealing");
-    }
-  });
-
-  if (!accordion.classList.contains("product-accordion--motion-ready")) {
-    window.requestAnimationFrame(() => {
-      accordion.classList.add("product-accordion--motion-ready");
-    });
-  }
-
-  if (motion !== "initial") {
-    const expanded = $(`[data-product-item="${activeKey}"] [data-product-expanded]`, accordion);
-    const animationId = ++productAnimationId;
-    window.setTimeout(() => {
-      if (productAnimationId !== animationId || !expanded) return;
-      accordion.dataset.productDirection = "settled";
-      expanded.classList.remove(...motionClasses);
-      expanded.dataset.productMotion = "settled";
-    }, 1320);
-  }
+  if (!accordion) return;
+  accordion.classList.add("solution-grid");
+  accordion.innerHTML = productOrder.map((key) => solutionCardMarkup(key)).join("");
   applyCjkLatinSpacing(accordion);
 }
 
