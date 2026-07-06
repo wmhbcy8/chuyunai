@@ -1290,6 +1290,36 @@ const ecosystemCopy = {
   }
 };
 
+ecosystemCopy["zh-CN"] = {
+  heading: {
+    title: "楚云资源",
+    desc: "连接高校、园区、跨境渠道与算力中心的优质资源"
+  },
+  infrastructure: {
+    eyebrow: "资源网络",
+    title: "楚云数航连接高校、园区、跨境渠道与算力资源",
+    desc: "以武汉光谷科学岛为核心，串联高校实训、OPC园区、跨境平台、内容团队、投资人和光谷超算中心战略合作资源，支撑项目从课程、工位、店铺到算力调用的完整落地。",
+    stats: [["4", "核心业务版块"], ["6+", "资源协同场景"], ["OPC", "园区复制模型"], ["AI", "算力与内容底座"]],
+    nodes: [["武汉光谷科学岛", "总部与OPC样板基地"], ["高校实训基地", "课程、学员、项目生产"], ["跨境渠道", "TikTok / Ozon / 速卖通 / 独立站"], ["光谷超算中心", "算力运营与企业AI应用"], ["内容团队", "AI漫剧、虚拟人、品牌内容"], ["企业客户", "数字贸易、培训与算力方案"]]
+  },
+  compliance: {
+    title: "安全合规与交付保障",
+    desc: "围绕课程、店群、园区和算力合作建立统一的项目台账、交付标准、数据看板与资源审核机制。",
+    items: [["项目可追踪", "课程、工位、店铺、内容生产和算力调用均形成阶段记录。"], ["资源可审核", "合作伙伴、渠道资源、项目数据和收益路径进入统一评估流程。"], ["交付可复制", "将高校、园区、企业和投资合作拆解为可复用的方案包。"]]
+  },
+  customers: {
+    eyebrow: "客户案例",
+    title: "成功的客户案例",
+    desc: "以真实业务场景展示楚云数航的项目组织能力。",
+    cases: [["高校实训共建", "围绕AI漫剧、数字贸易和跨境店群课程，形成可招生、可实训、可就业的项目闭环。"], ["OPC园区样板", "规划工位、直播间、产品展示、AI实训室和数据看板，支撑园区招商与运营。"], ["跨境店群孵化", "通过店群托管、运营陪跑、项目库筛选和投资分润，帮助创业团队跑通跨境业务。"]]
+  }
+};
+
+ecosystemCopy.en.heading = {
+  title: "ChuYun Resources",
+  desc: "Premium resources connecting universities, parks, cross-border channels and compute centers"
+};
+
 function ecosystemData() {
   return currentLanguage === "en" ? ecosystemCopy.en : ecosystemCopy["zh-CN"];
 }
@@ -1311,6 +1341,10 @@ function renderEcosystemShowcase() {
   if (!section) return;
   const data = ecosystemData();
   section.innerHTML = `
+    <div class="ecosystem-showcase__heading">
+      <h2>${escapeHtml(data.heading.title)}</h2>
+      <p>${escapeHtml(data.heading.desc)}</p>
+    </div>
     <div class="ecosystem-map">
       <div class="ecosystem-map__copy">
         <span>${escapeHtml(data.infrastructure.eyebrow)}</span>
