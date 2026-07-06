@@ -2991,9 +2991,31 @@ html[lang="zh-Hant"] .hero p {
 .products {
   --products-content-shift: clamp(0px, calc((100vw - 1280px) * 0.28), 56px);
   --products-card-text-shift: clamp(0px, calc((100vw - 1280px) * 0.44), 88px);
+  position: relative;
   z-index: 0;
-  padding: 0 0 var(--module-gap);
-  overflow: visible;
+  margin: 0 0 var(--module-gap);
+  padding: clamp(72px, 8vw, 112px) 0 clamp(88px, 9vw, 128px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 157, 69, 0.34), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(240, 46, 39, 0.18), transparent 30%),
+    linear-gradient(180deg, #fff8ef 0%, #fff2df 42%, #fffaf3 100%);
+}
+
+.products::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 34%),
+    radial-gradient(circle at 50% 100%, rgba(255, 181, 85, 0.24), transparent 36%);
+  content: "";
+  pointer-events: none;
+}
+
+.products > * {
+  position: relative;
+  z-index: 1;
 }
 
 .products .section-heading {
